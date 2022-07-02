@@ -11,7 +11,7 @@ namespace CaesarCipher
         static void Main(string[] args)
         {
             Functionality functionality = new Functionality();
-            char[] secretMessage = functionality.RecordMessage();
+            string[] secretMessage = functionality.RecordMessage();
 
             string encryptMsg = functionality.EncryptMessage(secretMessage);
             

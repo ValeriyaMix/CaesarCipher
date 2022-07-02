@@ -19,33 +19,51 @@ namespace CaesarCipher
         int new_char_inx;
         char encrypted_char;
         string encryptMsg_str;
+        char spec_char;
+        int inx_spec_char;
 
         //Method that takes user's input
-        public char[] RecordMessage()
+        public string[] RecordMessage()
         {
             Console.WriteLine("Please type in your secret message");
             string secret_mes = Console.ReadLine().ToLower();
-            char[] secretMessage = secret_mes.ToCharArray();
-            return secretMessage;
+            string[] secret_mes_word = secret_mes.Split(' ');
+            return secret_mes_word;
+            
 
         }
 
 
 
         //Method that encrypts the message
-        public string EncryptMessage(char[] message)
+        public string EncryptMessage(string[] message)
         {
-            for (int i = 0; i < message.Length; i++)
+            foreach (string word in message)
             {
-                char_secretMsg = message[i];
-                char_inx = Array.IndexOf(alphabet, char_secretMsg);
-                new_char_inx = (char_inx + 3) % alphabet.Length;
-                encrypted_char = alphabet[new_char_inx];
-                encryptedMessage = new char[message.Length];
-                encryptedMessage[i] = encrypted_char;
-                encryptMsg_str += encryptedMessage[i];
-
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (Char.IsLetter(word[i]) == false  || word[i] == ' ')
+                    {
+                        spec_char = word[i];
+                        inx_spec_char = i;
+                        encryptMsg_str += spec_char;
+                    }
+                    else
+                    {
+                        char_secretMsg = word[i];
+                        char_inx = Array.IndexOf(alphabet, char_secretMsg);
+                        new_char_inx = (char_inx + 3) % alphabet.Length;
+                        encrypted_char = alphabet[new_char_inx];
+                        encryptedMessage = new char[word.Length];
+                        encryptedMessage[i] = encrypted_char;
+                        encryptMsg_str += encryptedMessage[i];
+                    }
+                    
+                    
+                }
+                encryptMsg_str = encryptMsg_str + ' ';
             }
+            
             
 
             return encryptMsg_str;
