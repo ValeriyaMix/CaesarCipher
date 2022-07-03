@@ -70,5 +70,38 @@ namespace CaesarCipher
         }
 
         //Build a method that decrypts the message
+
+        public string DencryptMessage(string[] message)
+        {
+            foreach (string word in message)
+            {
+                for (int i = 0; i < word.Length; i++)
+                {
+                    if (Char.IsLetter(word[i]) == false || word[i] == ' ')
+                    {
+                        spec_char = word[i];
+                        inx_spec_char = i;
+                        encryptMsg_str += spec_char;
+                    }
+                    else
+                    {
+                        char_secretMsg = word[i];
+                        char_inx = Array.IndexOf(alphabet, char_secretMsg);
+                        new_char_inx = (char_inx - 3) % alphabet.Length;
+                        encrypted_char = alphabet[new_char_inx];
+                        encryptedMessage = new char[word.Length];
+                        encryptedMessage[i] = encrypted_char;
+                        encryptMsg_str += encryptedMessage[i];
+                    }
+
+
+                }
+                encryptMsg_str = encryptMsg_str + ' ';
+            }
+
+
+
+            return encryptMsg_str;
+        }
     }
 }
